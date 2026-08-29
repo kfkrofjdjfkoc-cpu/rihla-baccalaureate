@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>رحلة البكالوريا</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#fff;border-bottom:1px solid #e7eaf0;position:sticky;top:0;z-index:5}.wrap{max-width:1100px;margin:auto;padding:0 18px}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-size:22px;font-weight:800;cursor:pointer}.brand span{font-size:28px;margin-left:8px}
+button{border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}.primary{background:#172033;color:#fff}.ghost{background:#eef1f6;color:#172033}.danger{background:#ffe8e8;color:#a40000}.success{background:#e7f8ed;color:#087a36}
+.hero{margin:22px 0;padding:28px;border-radius:22px;background:#fff;border:1px solid #e7eaf0}.hero h1{margin:0 0 8px;font-size:30px}.hero p{color:#657086}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:#fff;border:1px solid #e7eaf0;border-radius:18px;padding:18px;box-shadow:0 3px 12px #1720330b}.card h3{margin:8px 0}.muted{color:#687389;font-size:14px}.icon{font-size:32px}.section{margin:22px 0}.section h2{font-size:23px}.progress{height:9px;background:#e9edf3;border-radius:20px;overflow:hidden}.bar{height:100%;background:#172033;border-radius:20px}.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.navlinks button{background:#fff;border:1px solid #e7eaf0}.hidden{display:none!important}.back{margin-bottom:14px}.lesson{display:flex;justify-content:space-between;align-items:center;gap:10px}.badge{background:#eef1f6;border-radius:20px;padding:6px 10px;font-size:12px}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.admin-tabs button.active{background:#172033;color:#fff}.form{display:grid;gap:10px}.form input,.form textarea,.form select{width:100%;padding:12px;border:1px solid #dfe4ec;border-radius:10px;font:inherit;background:#fff}.form textarea{min-height:100px;resize:vertical}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.small{padding:8px 11px;font-size:13px}.modal{position:fixed;inset:0;background:#17203399;display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-box{background:#fff;width:min(700px,100%);max-height:90vh;overflow:auto;border-radius:20px;padding:22px}.toast{position:fixed;bottom:18px;left:18px;background:#172033;color:#fff;padding:12px 16px;border-radius:12px;z-index:30;display:none}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;margin-top:12px;background:#111}.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.lesson-card{min-height:150px}
+.auth-screen{position:fixed;inset:0;background:#f5f7fb;z-index:100;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}.auth-box{width:min(540px,100%);background:#fff;border:1px solid #e7eaf0;border-radius:24px;padding:24px;box-shadow:0 10px 35px #17203318}.auth-logo{text-align:center;font-size:42px}.auth-box h1{text-align:center;margin:8px 0}.auth-box p{text-align:center;color:#687389}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.auth-error{color:#a40000;background:#ffe8e8;padding:10px;border-radius:10px;display:none}.auth-box input,.auth-box select{width:100%;margin:6px 0;padding:13px;border:1px solid #dfe3eb;border-radius:12px;font-size:15px}.auth-box .form{display:grid;gap:6px}
+.track-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.track-option{padding:16px;border:2px solid #e3e7ee;border-radius:16px;background:#fff;text-align:right;cursor:pointer}.track-option.selected{border-color:#172033;background:#f0f2f6}.track-option b{display:block;margin-bottom:5px}
+.user-table{width:100%;border-collapse:collapse;margin-top:10px}.user-table th,.user-table td{padding:12px;border:1px solid #e7eaf0;text-align:right}.user-table th{background:#f8f9fa}
+footer{text-align:center;padding:35px;color:#7a8497}@media(max-width:600px){.hero h1{font-size:25px}.nav{min-height:60px}.brand{font-size:19px}}
+</style>
+</head>
+<body>
+<div id="authScreen" class="auth-screen"><div class="auth-box">
+<div class="auth-logo">🎓</div><h1>رحلة البكالوريا</h1><p>أنشئ حسابك أو سجّل الدخول للمتابعة</p>
+<div class="auth-tabs"><button id="loginTab" type="button" class="primary" onclick="authMode('login')">تسجيل الدخول</button><button id="registerTab" type="button" class="ghost" onclick="authMode('register')">إنشاء حساب</button></div>
+<div id="authError" class="auth-error"></div>
+
+<form id="loginForm" class="form" onsubmit="event.preventDefault(); login();">
+<input id="loginPhone" name="username" autocomplete="username" inputmode="tel" placeholder="رقم الهاتف">
+<input id="loginPassword" name="password" autocomplete="current-password" type="password" placeholder="كلمة المرور">
+<button type="submit" class="primary">دخول 🚀</button>
+</form>
+
+<form id="registerForm" class="form hidden" onsubmit="event.preventDefault(); register();">
+<input id="regName" placeholder="الاسم بالكامل">
+<input id="regPhone" name="username" autocomplete="username" inputmode="tel" placeholder="رقم الهاتف">
+<input id="regPassword" name="password" autocomplete="new-password" type="password" placeholder="كلمة المرور">
+<input id="regPassword2" autocomplete="new-password" type="password" placeholder="تأكيد كلمة المرور">
+<div><b>اختر المسار</b><div class="track-grid" style="margin-top:8px">
+<div class="track-option" data-track="الطب وعلوم الحياة" onclick="pickTrack(this)"><b>🩺 الطب وعلوم الحياة</b><span class="muted">عربي • إنجليزي • تاريخ • فيزياء • رياضيات</span></div>
+<div class="track-option" data-track="الهندسة وعلوم الحاسب" onclick="pickTrack(this)"><b>⚙️ الهندسة وعلوم الحاسب</b><span class="muted">عربي • إنجليزي • تاريخ • كيمياء • برمجة</span></div>
+<div class="track-option" data-track="الأعمال" onclick="pickTrack(this)"><b>💼 الأعمال</b><span class="muted">عربي • إنجليزي • تاريخ • محاسبة • إدارة الأعمال</span></div>
+<div class="track-option" data-track="الآداب والفنون" onclick="pickTrack(this)"><b>🎨 الآداب والفنون</b><span class="muted">عربي • إنجليزي • تاريخ • علم النفس • فرنساوي</span></div>
+</div></div><input type="hidden" id="regTrack">
+<button type="submit" class="primary">إنشاء الحساب ✅</button>
+</form>
+
+</div></div>
+
+<header><div class="wrap nav"><div class="brand" onclick="openAdminPrompt()"><span>🎓</span>رحلة البكالوريا</div><div class="row"><button class="ghost" onclick="show('account')">👤 حسابي</button><button id="adminNavBtn" class="ghost hidden" onclick="openAdmin()">⚙️ الإدارة</button></div></div></header>
+<main class="wrap">
+<div class="navlinks"><button onclick="show('home')">🏠 الرئيسية</button><button onclick="show('subjects')">📚 المواد</button><button onclick="show('exams')">📝 الامتحانات</button><button onclick="show('account')">👤 حسابي</button><button class="danger" onclick="logout()">تسجيل الخروج</button></div>
+<section id="home"><div class="hero"><h1>أهلاً بك في رحلة البكالوريا 👋</h1><p id="homeTrackText"></p><button class="primary" onclick="show('subjects')">ابدأ المذاكرة 🚀</button></div><div class="section"><h2>🎯 تقدمك</h2><div class="card"><div style="display:flex;justify-content:space-between"><b>التقدم العام</b><span id="progressText">0%</span></div><div class="progress" style="margin-top:10px"><div id="progressBar" class="bar" style="width:0%"></div></div></div></div><div class="section"><h2>📢 آخر إعلان</h2><div class="card"><b id="announcementTitle"></b><p class="muted" id="announcementText"></p></div></div></section>
+<section id="subjects" class="hidden"><div class="hero"><h1>📚 مواد مسارك</h1><p id="subjectsTrack"></p></div><div id="subjectGrid" class="grid"></div></section>
+<section id="subject" class="hidden"><button class="ghost back" onclick="show('subjects')">← رجوع للمواد</button><div class="hero"><h1 id="subjectTitle"></h1><p>الدروس والفيديوهات المتاحة</p></div><div id="lessonList" class="grid"></div></section>
+<section id="exams" class="hidden"><div class="hero"><h1>📝 الامتحانات</h1><p>اختبر نفسك واعرف مستواك.</p></div><div id="examGrid" class="grid"></div></section>
+<section id="exam" class="hidden"><button class="ghost back" onclick="show('exams')">← رجوع للامتحانات</button><div class="hero"><h1 id="examTitle"></h1><p id="examInfo"></p><div id="examQuestions"></div><button class="primary" onclick="finishExam()">تسليم الاختبار</button></div></section>
+<section id="account" class="hidden"><div class="hero"><h1>👤 حساب الطالب</h1><p>بيانات الحساب.</p></div><div class="grid"><div class="card"><b>الاسم</b><h3 id="studentName"></h3></div><div class="card"><b>رقم الهاتف</b><h3 id="studentPhone"></h3></div><div class="card"><b>المسار</b><h3 id="studentTrack"></h3></div><div class="card"><b>الامتحانات</b><h3 id="examCount">0</h3></div><div class="card"><b>متوسط الدرجات</b><h3 id="avgScore">—</h3></div></div></section>
+<section id="admin" class="hidden"><button class="ghost back" onclick="show('home')">← العودة للمنصة</button><div class="hero"><h1>⚙️ لوحة تحكم الأدمن</h1><p>إدارة المنصة والطلاب.</p></div><div class="admin-tabs">
+<button id="tabSubjects" class="active" onclick="adminTab('subjects')">📚 المواد والدروس</button>
+<button id="tabVideos" onclick="adminTab('videos')">🎥 إضافة فيديوهات</button>
+<button id="tabExams" onclick="adminTab('exams')">📝 الامتحانات التفاعلية</button>
+<button id="tabUsers" onclick="adminTab('users')">👥 الطلاب والحسابات</button>
+<button id="tabSettings" onclick="adminTab('settings')">⚙️ الإعدادات ونقل البيانات</button>
+</div>
+<div id="adminSubjects"></div><div id="adminVideos" class="hidden"></div><div id="adminExams" class="hidden"></div><div id="adminUsers" class="hidden"></div><div id="adminSettings" class="hidden"></div></section>
+</main><footer>🎓 رحلة البكالوريا — المنصة المجانية للطلاب<br>الأدمن: ميدو</footer><div id="modal" class="modal hidden"></div><div id="toast" class="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
